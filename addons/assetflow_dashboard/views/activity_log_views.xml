@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Activity Log Tree View -->
-    <!-- TODO: Implement activity log list view -->
-
-    <!-- Activity Log Search View -->
-    <!-- TODO: Implement activity log search with date filters -->
-
-    <!-- Activity Log Action -->
-    <!-- TODO: Implement activity log action -->
+    <record id="view_activity_log_tree" model="ir.ui.view">
+        <field name="name">assetflow.activity.log.tree</field>
+        <field name="model">assetflow.activity.log</field>
+        <field name="arch" type="xml">
+            <tree string="Activity Logs" create="false" edit="false" delete="false">
+                <field name="timestamp"/>
+                <field name="action"/>
+                <field name="model_name"/>
+                <field name="record_id"/>
+                <field name="user_id"/>
+            </tree>
+        </field>
+    </record>
 </odoo>

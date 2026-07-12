@@ -1,1 +1,8 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_notification_employee,notification.employee,model_assetflow_notification,assetflow_base.group_assetflow_employee,1,1,0,0
+access_notification_admin,notification.admin,model_assetflow_notification,assetflow_base.group_assetflow_administrator,1,1,1,1
+access_activity_log_admin,activity_log.admin,model_assetflow_activity_log,assetflow_base.group_assetflow_administrator,1,0,0,0
+access_audit_cycle_manager,audit_cycle.manager,model_assetflow_audit_cycle,assetflow_base.group_assetflow_asset_manager,1,1,1,0
+access_audit_cycle_admin,audit_cycle.admin,model_assetflow_audit_cycle,assetflow_base.group_assetflow_administrator,1,1,1,1
+access_audit_item_manager,audit_item.manager,model_assetflow_audit_item,assetflow_base.group_assetflow_asset_manager,1,1,1,1
+access_audit_item_admin,audit_item.admin,model_assetflow_audit_item,assetflow_base.group_assetflow_administrator,1,1,1,1

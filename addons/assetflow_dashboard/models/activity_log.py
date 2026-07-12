@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-
-from odoo import models, fields, api
-
+from odoo import models, fields
 
 class ActivityLog(models.Model):
-    """Activity Log for tracking all system activities."""
     _name = 'assetflow.activity.log'
     _description = 'Activity Log'
     _order = 'create_date desc'
 
-    # TODO: Implement activity log fields (action, model, record_id, user_id, etc.)
-    pass
+    action = fields.Char(string='Action', required=True)
+    model_name = fields.Char(string='Model Name')
+    record_id = fields.Integer(string='Record ID')
+    user_id = fields.Many2one('res.users', string='User')
+    timestamp = fields.Datetime(string='Timestamp', default=fields.Datetime.now)

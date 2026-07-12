@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Dashboard & Audit Sub-Menu Items -->
-    <!-- TODO: Define dashboard and audit menu items -->
+    <menuitem id="menu_assetflow_audit_root" name="Audits" parent="assetflow_base.menu_assetflow_root" sequence="40"/>
+    
+    <record id="action_audit_cycle" model="ir.actions.act_window">
+        <field name="name">Audit Cycles</field>
+        <field name="res_model">assetflow.audit.cycle</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_audit_cycle" name="Audit Cycles" parent="menu_assetflow_audit_root" action="action_audit_cycle" sequence="10"/>
+
+    <record id="action_activity_log" model="ir.actions.act_window">
+        <field name="name">System Activity Logs</field>
+        <field name="res_model">assetflow.activity.log</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_activity_log" name="Activity Logs" parent="assetflow_base.menu_assetflow_root" action="action_activity_log" sequence="90" groups="assetflow_base.group_assetflow_administrator"/>
 </odoo>
