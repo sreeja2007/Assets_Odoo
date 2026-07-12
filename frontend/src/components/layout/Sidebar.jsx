@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, Building2, Package, ArrowLeftRight,
   CalendarDays, Wrench, ClipboardList, BarChart3,
-  Bell, LogOut, ChevronRight,
+  Bell, LogOut, ChevronRight, X,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useAppData } from '../../context/AppDataContext';
@@ -20,13 +20,13 @@ const navItems = [
   { to: '/notifications',icon: Bell,            label: 'Notifications' },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ onClose }) {
   const { currentUser, logout } = useAuth();
   const { notifications } = useAppData();
   const navigate = useNavigate();
   const unread = notifications.filter(n => n.userId === currentUser?.id && !n.read).length;
 
-  const handleLogout = () => { logout(); navigate('/login'); };
+  const handleLogout = () => { logout(); navigate('/login'); if (onClose) onClose(); };
 
   const visibleItems = navItems.filter(item => {
     if (item.adminOnly) return currentUser?.role === ROLES.ADMIN;
@@ -34,9 +34,9 @@ export default function Sidebar() {
   });
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 bg-white border-r border-slate-100 flex flex-col z-40 shadow-sm">
+    <aside className="h-full w-64 bg-white border-r border-slate-100 flex flex-col shadow-sm">
       {/* Brand */}
-      <div className="px-6 py-5 border-b border-slate-100">
+      <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center">
             <span className="text-white font-bold text-sm">AF</span>
@@ -46,6 +46,15 @@ export default function Sidebar() {
             <p className="text-xs text-slate-400">Enterprise Asset Manager</p>
           </div>
         </div>
+        {onClose && (
+          <button 
+            onClick={onClose} 
+            className="lg:hidden p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-colors"
+            title="Close menu"
+          >
+            <X size={18} />
+          </button>
+        )}
       </div>
 
       {/* Nav */}
@@ -55,6 +64,7 @@ export default function Sidebar() {
             <li key={to}>
               <NavLink
                 to={to}
+                onClick={onClose}
                 className={({ isActive }) =>
                   `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all group
                   ${isActive

@@ -50,8 +50,8 @@ function AssetModal({ open, onClose, initial }) {
 
   return (
     <Modal open={open} onClose={onClose} title={initial ? 'Edit Asset' : 'Register Asset'} maxWidth="max-w-2xl">
-      <div className="grid grid-cols-2 gap-4">
-        <Input label="Asset Name" value={form.name} onChange={set('name')} error={errors.name} placeholder="e.g. MacBook Pro" className="col-span-2" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Input label="Asset Name" value={form.name} onChange={set('name')} error={errors.name} placeholder="e.g. MacBook Pro" className="col-span-1 sm:col-span-2" />
         <Select label="Category" value={form.categoryId} onChange={set('categoryId')} error={errors.categoryId}>
           <option value="">Select category</option>
           {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
@@ -63,9 +63,9 @@ function AssetModal({ open, onClose, initial }) {
           {['Excellent', 'Good', 'Fair', 'Poor', 'N/A'].map(c => <option key={c}>{c}</option>)}
         </Select>
         <Input label="Location" value={form.location} onChange={set('location')} error={errors.location} placeholder="e.g. Engineering Lab" />
-
+ 
         {selectedCat?.customFields?.length > 0 && (
-          <div className="col-span-2 border-t border-slate-100 pt-4 space-y-4">
+          <div className="col-span-1 sm:col-span-2 border-t border-slate-100 pt-4 space-y-4">
             <p className="text-sm font-medium text-slate-700">Category-specific fields</p>
             {selectedCat.customFields.map(f => (
               <Input
@@ -78,8 +78,8 @@ function AssetModal({ open, onClose, initial }) {
             ))}
           </div>
         )}
-
-        <label className="col-span-2 flex items-center gap-3 cursor-pointer">
+ 
+        <label className="col-span-1 sm:col-span-2 flex items-center gap-3 cursor-pointer">
           <input type="checkbox" checked={form.isBookable} onChange={set('isBookable')} className="w-4 h-4 accent-blue-600 rounded" />
           <span className="text-sm text-slate-700">Mark as shared / bookable resource</span>
         </label>
@@ -183,13 +183,13 @@ export default function AssetsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-semibold text-slate-900 tracking-tight">Asset Directory</h1>
           <p className="text-slate-500 mt-1">{assets.length} total assets</p>
         </div>
         {canManage && (
-          <Button variant="primary" onClick={() => setAssetModal({ open: true, initial: null })}>
+          <Button variant="primary" onClick={() => setAssetModal({ open: true, initial: null })} className="w-full sm:w-auto justify-center">
             <Plus size={14} className="mr-1.5" />Register Asset
           </Button>
         )}
@@ -197,7 +197,7 @@ export default function AssetsPage() {
 
       {/* Search + Filters */}
       <div className="flex flex-wrap items-center gap-3">
-        <div className="relative flex-1 min-w-64">
+        <div className="relative w-full md:flex-1 md:min-w-64">
           <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             className="w-full bg-white border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
@@ -206,20 +206,20 @@ export default function AssetsPage() {
             onChange={e => setSearch(e.target.value)}
           />
         </div>
-        <select className="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-500" value={filterCat} onChange={e => setFilterCat(e.target.value)}>
+        <select className="w-full sm:w-auto bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-500" value={filterCat} onChange={e => setFilterCat(e.target.value)}>
           <option value="">All Categories</option>
           {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
-        <select className="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-500" value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
+        <select className="w-full sm:w-auto bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-500" value={filterStatus} onChange={e => setFilterStatus(e.target.value)}>
           <option value="">All Statuses</option>
           {ALL_STATUSES.map(s => <option key={s}>{s}</option>)}
         </select>
-        <select className="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-500" value={filterDept} onChange={e => setFilterDept(e.target.value)}>
+        <select className="w-full sm:w-auto bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-700 focus:outline-none focus:border-blue-500" value={filterDept} onChange={e => setFilterDept(e.target.value)}>
           <option value="">All Departments</option>
           {departments.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
         </select>
         {(filterCat || filterStatus || filterDept || search) && (
-          <button onClick={() => { setFilterCat(''); setFilterStatus(''); setFilterDept(''); setSearch(''); }} className="text-sm text-blue-600 hover:underline">
+          <button onClick={() => { setFilterCat(''); setFilterStatus(''); setFilterDept(''); setSearch(''); }} className="text-sm text-blue-600 hover:underline w-full sm:w-auto text-left sm:text-center mt-1 sm:mt-0">
             Clear filters
           </button>
         )}

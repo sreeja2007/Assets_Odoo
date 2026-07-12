@@ -90,7 +90,7 @@ export default function DashboardPage() {
       </div>
 
       {/* KPIs */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         <KpiCard icon={Package}       label="Available"          value={kpis.available}       color="bg-emerald-500" />
         <KpiCard icon={Users}         label="Allocated"          value={kpis.allocated}        color="bg-blue-500" />
         <KpiCard icon={Wrench}        label="Maintenance Today"  value={kpis.maintenanceToday} color="bg-amber-500" />
@@ -112,7 +112,7 @@ export default function DashboardPage() {
             {overdueAllocations.map(a => {
               const daysOverdue = Math.floor((today - new Date(a.expectedReturnDate)) / (1000 * 60 * 60 * 24));
               return (
-                <div key={a.id} className="flex items-center justify-between bg-white/70 rounded-xl px-4 py-2.5">
+                <div key={a.id} className="flex flex-col sm:flex-row sm:items-center justify-between bg-white/70 rounded-xl px-4 py-2.5 gap-2">
                   <div className="flex items-center gap-3">
                     <Package size={15} className="text-red-400" />
                     <div>
@@ -120,7 +120,7 @@ export default function DashboardPage() {
                       <p className="text-xs text-slate-500">Held by {a.userName}</p>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="text-left sm:text-right">
                     <p className="text-xs font-semibold text-red-600">{daysOverdue}d overdue</p>
                     <p className="text-xs text-slate-400">Due: {new Date(a.expectedReturnDate).toLocaleDateString()}</p>
                   </div>

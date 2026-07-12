@@ -179,12 +179,12 @@ export default function OrgSetupPage() {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-1 bg-slate-100 rounded-2xl p-1 w-fit">
+      <div className="flex flex-wrap items-center gap-1 bg-slate-100 rounded-2xl p-1 w-full sm:w-fit">
         {tabs.map(t => (
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
-            className={`px-5 py-2 rounded-xl text-sm font-medium transition-all ${tab === t.id ? 'bg-white shadow-sm text-slate-900' : 'text-slate-500 hover:text-slate-700'}`}
+            className={`flex-1 sm:flex-none text-center px-5 py-2 rounded-xl text-sm font-medium transition-all ${tab === t.id ? 'bg-white shadow-sm text-slate-900' : 'text-slate-500 hover:text-slate-700'}`}
           >
             {t.label}
           </button>
@@ -194,9 +194,9 @@ export default function OrgSetupPage() {
       {/* Departments */}
       {tab === 'departments' && (
         <Card>
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-4 border-b border-slate-100 gap-4">
             <h2 className="text-base font-medium text-slate-900">Departments ({departments.length})</h2>
-            <Button variant="primary" onClick={() => setDeptModal({ open: true, initial: null })}>
+            <Button variant="primary" onClick={() => setDeptModal({ open: true, initial: null })} className="w-full sm:w-auto justify-center">
               <Plus size={14} className="mr-1.5" /> Add Department
             </Button>
           </div>
@@ -233,9 +233,9 @@ export default function OrgSetupPage() {
       {/* Categories */}
       {tab === 'categories' && (
         <Card>
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-4 border-b border-slate-100 gap-4">
             <h2 className="text-base font-medium text-slate-900">Asset Categories ({categories.length})</h2>
-            <Button variant="primary" onClick={() => setCatModal({ open: true, initial: null })}>
+            <Button variant="primary" onClick={() => setCatModal({ open: true, initial: null })} className="w-full sm:w-auto justify-center">
               <Plus size={14} className="mr-1.5" /> Add Category
             </Button>
           </div>
@@ -279,10 +279,10 @@ export default function OrgSetupPage() {
       {/* Employee Directory */}
       {tab === 'employees' && (
         <Card>
-          <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between px-6 py-4 border-b border-slate-100 gap-4">
             <h2 className="text-base font-medium text-slate-900">Employee Directory ({users.length})</h2>
             <input
-              className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 w-64"
+              className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 w-full sm:w-64"
               placeholder="Search by name or email..."
               value={search}
               onChange={e => setSearch(e.target.value)}
