@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="action_lifecycle_report" model="ir.actions.report">
+        <field name="name">Asset Lifecycle Report</field>
+        <field name="model">assetflow.asset</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">assetflow_assets.lifecycle_report</field>
+        <field name="report_file">assetflow_assets.lifecycle_report</field>
+    </record>
+
+</odoo>
