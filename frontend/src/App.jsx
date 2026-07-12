@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { AppDataProvider } from './context/AppDataContext';
 import { ToastProvider } from './components/common/Toast';
@@ -13,6 +13,7 @@ import MaintenancePage from './pages/MaintenancePage';
 import AuditPage from './pages/AuditPage';
 import ReportsPage from './pages/ReportsPage';
 import NotificationsPage from './pages/NotificationsPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 export default function App() {
   return (
@@ -33,7 +34,7 @@ export default function App() {
                 <Route path="/reports"      element={<ReportsPage />} />
                 <Route path="/notifications"element={<NotificationsPage />} />
               </Route>
-              <Route path="*" element={<Navigate to="/dashboard" replace />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </ToastProvider>
         </AppDataProvider>

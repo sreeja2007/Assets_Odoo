@@ -37,12 +37,96 @@ function Sparkline({ values, color = '#3b82f6' }) {
   const w = 200, h = 60;
   const pts = values.map((v, i) => `${(i / (values.length - 1)) * w},${h - (v / max) * (h - 8)}`).join(' ');
   return (
-    <svg width={w} height={h} className="overflow-visible">
-      <polyline points={pts} fill="none" stroke={color} strokeWidth={2.5} strokeLinejoin="round" strokeLinecap="round" />
-      {values.map((v, i) => (
-        <circle key={i} cx={(i / (values.length - 1)) * w} cy={h - (v / max) * (h - 8)} r={3} fill={color} />
-      ))}
-    </svg>
+    <div className="max-w-[200px] w-full">
+      <svg viewBox="0 0 200 60" className="overflow-visible w-full h-auto">
+        <polyline points={pts} fill="none" stroke={color} strokeWidth={2.5} strokeLinejoin="round" strokeLinecap="round" />
+        {values.map((v, i) => (
+          <circle key={i} cx={(i / (values.length - 1)) * w} cy={h - (v / max) * (h - 8)} r={3} fill={color} />
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+// ── Simple Donut / Pie Chart ───────────────────────────────────
+function DonutChart({ data, title }) {
+  const total = useMemo(() => data.reduce((sum, d) => sum + d.value, 0), [data]);
+  const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ef4444', '#64748b'];
+
+  const r = 36;
+  const cx = 50;
+  const cy = 50;
+  const strokeWidth = 12;
+  const circumference = 2 * Math.PI * r;
+
+  const segments = useMemo(() => {
+    if (total === 0) return [];
+    let accumulatedPercent = 0;
+    return data.map((d, index) => {
+      const percent = d.value / total;
+      const strokeLength = percent * circumference;
+      const strokeOffset = circumference - strokeLength;
+      
+      const angle = (accumulatedPercent * 360) - 90;
+      accumulatedPercent += percent;
+
+      return {
+        ...d,
+        color: COLORS[index % COLORS.length],
+        strokeLength,
+        strokeOffset,
+        angle,
+        percent: Math.round(percent * 100)
+      };
+    });
+  }, [data, total, circumference]);
+
+  return (
+    <div>
+      <h3 className="text-base font-medium text-slate-900 mb-4">{title}</h3>
+      {total === 0 ? (
+        <p className="text-sm text-slate-400 py-8 text-center">No data available</p>
+      ) : (
+        <div className="flex flex-col sm:flex-row items-center gap-6">
+          <div className="relative w-36 h-36 flex-shrink-0">
+            <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
+              {segments.map((seg, i) => (
+                <circle
+                  key={i}
+                  cx={cx}
+                  cy={cy}
+                  r={r}
+                  fill="transparent"
+                  stroke={seg.color}
+                  strokeWidth={strokeWidth}
+                  strokeDasharray={`${seg.strokeLength} ${circumference}`}
+                  strokeDashoffset={0}
+                  transform={`rotate(${seg.angle + 90} ${cx} ${cy})`}
+                />
+              ))}
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <span className="text-xl font-bold text-slate-800">{total}</span>
+              <span className="text-[10px] text-slate-400 uppercase font-semibold">Total</span>
+            </div>
+          </div>
+
+          <div className="flex-grow space-y-2 w-full">
+            {segments.map((seg, i) => (
+              <div key={i} className="flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2 min-w-0">
+                  <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: seg.color }} />
+                  <span className="text-slate-600 font-medium truncate">{seg.label}</span>
+                </div>
+                <span className="text-slate-400 font-semibold ml-2">
+                  {seg.value} ({seg.percent}%)
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -154,21 +238,21 @@ export default function ReportsPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-semibold text-slate-900 tracking-tight">Reports & Analytics</h1>
           <p className="text-slate-500 mt-1">Organization-wide asset insights and summaries</p>
         </div>
         <button
           onClick={handleExport}
-          className="flex items-center gap-2 bg-white border border-slate-200 text-slate-700 rounded-full px-5 py-2.5 font-medium hover:bg-slate-50 transition-colors text-sm"
+          className="flex items-center justify-center gap-2 bg-white border border-slate-200 text-slate-700 rounded-full px-5 py-2.5 font-medium hover:bg-slate-50 transition-colors text-sm w-full sm:w-auto"
         >
           Export CSV
         </button>
       </div>
 
       {/* Stat Overview */}
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
         <StatBox label="Available" value={stats.available} icon={Package} color="bg-emerald-50 text-emerald-900" />
         <StatBox label="Allocated" value={stats.allocated} icon={TrendingUp} color="bg-blue-50 text-blue-900" />
         <StatBox label="Maintenance" value={stats.underMaint} icon={Wrench} color="bg-amber-50 text-amber-900" />
@@ -183,7 +267,7 @@ export default function ReportsPage() {
           <BarChart data={deptAllocation} title="Assets by Department" colorClass="bg-blue-500" />
         </Card>
         <Card className="p-6">
-          <BarChart data={catUtilization} title="Allocated Assets by Category" colorClass="bg-violet-500" />
+          <DonutChart data={catUtilization} title="Allocated Assets by Category" />
         </Card>
         <Card className="p-6">
           <BarChart data={maintByCat} title="Maintenance Requests by Category" colorClass="bg-amber-500" />
