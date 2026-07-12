@@ -89,7 +89,7 @@ function AllocateModal({ open, onClose }) {
           </Select>
           <Select label="Department (optional)" value={form.toDeptId} onChange={set('toDeptId')}>
             <option value="">None</option>
-            {/* departments rendered via useAppData */}
+            {departments.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
           </Select>
         </div>
         <Input label="Expected Return Date (optional)" type="date" value={form.returnDate} onChange={set('returnDate')} />

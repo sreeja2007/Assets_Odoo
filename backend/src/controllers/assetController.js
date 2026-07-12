@@ -1,4 +1,4 @@
-const { query, getClient } = require('../config/db');
+const { query } = require('../config/db');
 const { createLog } = require('../models/activityLog');
 
 // ── Helpers ───────────────────────────────────────────────────

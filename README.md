@@ -1,49 +1,77 @@
-# AssetFlow - Enterprise Asset & Resource Management System
+# AssetFlow
 
-## Overview
-AssetFlow is a modular Odoo 18 addon suite for enterprise asset and resource management.
-Built for hackathon by a team of 4 developers.
+Enterprise Asset & Resource Management System — built with React, Node.js, and PostgreSQL.
 
-## Modules
+## Stack
 
-| Module | Description | Developer |
-|--------|-------------|----------|
-| assetflow_base | Core module: auth, users, roles, departments, categories | Developer 1 |
-| assetflow_assets | Asset registration, lifecycle, documents, locations | Developer 2 |
-| assetflow_operations | Allocation, transfer, booking, maintenance, approvals | Developer 3 |
-| assetflow_dashboard | Dashboard, notifications, activity logs, audit, KPIs | Developer 4 |
-| assetflow_reports | Reports, analytics, PDF/Excel export, charts | Shared |
+| Layer | Tech |
+|-------|------|
+| Frontend | React 19, React Router, Tailwind CSS 4, Lucide Icons |
+| Backend | Node.js, Express 5 |
+| Database | PostgreSQL (pg) |
+| Auth | JWT + bcrypt |
 
-## Installation
-
-1. Clone this repository into your Odoo addons path
-2. Install dependencies: `pip install -r requirements.txt`
-3. Update the Odoo module list
-4. Install `assetflow_base` first, then other modules in order
-
-## Module Dependencies
+## Project Structure
 
 ```
-assetflow_base (no addon dependencies)
-    └── assetflow_assets
-        └── assetflow_operations
-            └── assetflow_dashboard
-assetflow_reports (depends on all)
+├── frontend/          # React SPA
+│   ├── src/
+│   │   ├── context/   # AuthContext, AppDataContext
+│   │   ├── components/
+│   │   │   ├── common/    # Button, Card, Input, Modal, StatusPill, Toast
+│   │   │   └── layout/    # AppLayout, Sidebar
+│   │   ├── data/      # mockData.js (swap for API calls later)
+│   │   └── pages/     # One file per screen
+└── backend/
+    ├── migrations/    # 001_initial_schema.sql, 002_seed.sql
+    └── src/
+        ├── config/    # db.js, migrate.js
+        ├── controllers/
+        ├── middleware/ # auth, errorHandler, validate
+        ├── models/    # activityLog, notification
+        └── routes/
 ```
 
-## Development Order
+## Getting Started
 
-1. assetflow_base
-2. assetflow_assets
-3. assetflow_operations
-4. assetflow_dashboard
-5. assetflow_reports
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev          # http://localhost:5173
+```
 
-## Tech Stack
-- Odoo 18 Community/Enterprise
-- Python 3.10+
-- PostgreSQL 15+
-- XML, QWeb, OWL (frontend)
+### Backend
+```bash
+# 1. Create the database
+createdb assetflow
 
-## License
-LGPL-3
+# 2. Install dependencies
+cd backend
+npm install
+
+# 3. Copy and configure env
+cp .env.example .env   # edit DB_PASSWORD and JWT_SECRET
+
+# 4. Run migrations + seed data
+npm run migrate
+
+# 5. Start dev server
+npm run dev            # http://localhost:3001
+```
+
+### Demo accounts (frontend mock mode)
+| Role | Email |
+|------|-------|
+| Admin | alex@assetflow.io |
+| Asset Manager | jordan@assetflow.io |
+| Department Head | sam@assetflow.io |
+| Employee | taylor@assetflow.io |
+
+Password for all seeded backend accounts: `password123`
+
+## API Base URL
+
+```
+http://localhost:3001/api/v1
+```

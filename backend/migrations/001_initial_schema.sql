@@ -4,6 +4,7 @@
 
 -- ── Extensions ───────────────────────────────────────────────
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+CREATE EXTENSION IF NOT EXISTS "btree_gist"; -- required for the booking overlap EXCLUDE constraint
 
 -- ── ENUM types ────────────────────────────────────────────────
 CREATE TYPE user_role AS ENUM (
