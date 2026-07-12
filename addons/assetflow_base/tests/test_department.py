@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
-
 from odoo.tests.common import TransactionCase
-
+from odoo.exceptions import IntegrityError
 
 class TestDepartment(TransactionCase):
-    """Test cases for AssetFlow Department model."""
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.department_model = cls.env['assetflow.department']
 
-    def setUp(self):
-        super().setUp()
-        # TODO: Set up test data
+    def test_create_department(self):
+        dept = self.department_model.create({'name': 'Engineering'})
+        self.assertEqual(dept.name, 'Engineering')
+        self.assertTrue(dept.code.startswith('DEP/'))
 
-    def test_placeholder(self):
-        """Placeholder test - replace with actual tests."""
-        # TODO: Implement department tests
-        pass
+    def test_unique_department_name(self):
+        self.department_model.create({'name': 'HR'})
+        with self.assertRaises(IntegrityError):
+            self.department_model.create({'name': 'HR'})
