@@ -60,16 +60,6 @@ npm run migrate
 npm run dev            # http://localhost:3001
 ```
 
-### Demo accounts (frontend mock mode)
-| Role | Email |
-|------|-------|
-| Admin | alex@assetflow.io |
-| Asset Manager | jordan@assetflow.io |
-| Department Head | sam@assetflow.io |
-| Employee | taylor@assetflow.io |
-
-Password for all seeded backend accounts: `password123`
-
 ## API Base URL
 
 ```
