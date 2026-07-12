@@ -28,7 +28,9 @@ class AssetFlowOperationsAPI(http.Controller):
                     'asset': alloc.asset_id.name,
                     'employee': alloc.employee_id.name,
                     'allocate_date': str(alloc.allocate_date),
-                    'return_date': str(alloc.return_date) if alloc.return_date else False,
+                    'expected_return_date': str(alloc.expected_return_date) if alloc.expected_return_date else False,
+                    'actual_return_date': str(alloc.actual_return_date) if alloc.actual_return_date else False,
+                    'return_notes': alloc.return_notes,
                     'status': alloc.status
                 })
             return self._json_response({'status': 'success', 'data': data})
@@ -45,17 +47,59 @@ class AssetFlowOperationsAPI(http.Controller):
             asset_id = params.get('asset_id')
             employee_id = params.get('employee_id')
             allocate_date = params.get('allocate_date') or fields.Date.context_today(request.env.user)
+            expected_return_date = params.get('expected_return_date')
             
             if not asset_id or not employee_id:
                 return self._json_response({'status': 'error', 'message': 'Missing asset_id or employee_id'}, status=400)
+                
+            # Perform a pre-check to send a structured conflict error for the frontend
+            overlapping = request.env['assetflow.asset.allocation'].sudo().search([
+                ('asset_id', '=', int(asset_id)),
+                ('status', '=', 'allocated')
+            ], limit=1)
+            
+            if overlapping:
+                held_by = overlapping.employee_id.name
+                return self._json_response({
+                    'status': 'conflict',
+                    'held_by': held_by,
+                    'message': f"This asset is currently held by {held_by}."
+                }, status=409)
                 
             alloc = request.env['assetflow.asset.allocation'].sudo().create({
                 'asset_id': int(asset_id),
                 'employee_id': int(employee_id),
                 'allocate_date': allocate_date,
+                'expected_return_date': expected_return_date,
                 'status': 'allocated'
             })
             return self._json_response({'status': 'success', 'data': {'id': alloc.id, 'code': alloc.code}})
+        except Exception as e:
+            return self._json_response({'status': 'error', 'message': str(e)}, status=500)
+
+    @http.route('/api/operations/allocations/return', auth='public', type='http', methods=['POST', 'OPTIONS'], cors='*')
+    def return_allocation(self, **kwargs):
+        if request.httprequest.method == 'OPTIONS':
+            return self._json_response({})
+        try:
+            body = request.httprequest.data
+            params = json.loads(body) if body else {}
+            allocation_id = params.get('allocation_id')
+            return_notes = params.get('return_notes') or ''
+            
+            if not allocation_id:
+                return self._json_response({'status': 'error', 'message': 'Missing allocation_id'}, status=400)
+                
+            alloc = request.env['assetflow.asset.allocation'].sudo().browse(int(allocation_id))
+            if alloc.exists() and alloc.status == 'allocated':
+                alloc.write({
+                    'status': 'returned',
+                    'actual_return_date': fields.Date.context_today(request.env.user),
+                    'return_notes': return_notes
+                })
+                return self._json_response({'status': 'success', 'message': 'Asset marked as returned successfully'})
+            else:
+                return self._json_response({'status': 'error', 'message': 'Allocation record not found or not currently allocated'}, status=404)
         except Exception as e:
             return self._json_response({'status': 'error', 'message': str(e)}, status=500)
 
@@ -93,11 +137,25 @@ class AssetFlowOperationsAPI(http.Controller):
             if not asset_id or not start_time or not end_time:
                 return self._json_response({'status': 'error', 'message': 'Missing asset_id, start_datetime or end_datetime'}, status=400)
                 
+            # Check overlap to return a clean status code for React frontend
+            overlapping = request.env['assetflow.resource.booking'].sudo().search([
+                ('asset_id', '=', int(asset_id)),
+                ('status', 'in', ['upcoming', 'ongoing']),
+                ('start_datetime', '<', end_time),
+                ('end_datetime', '>', start_time)
+            ], limit=1)
+            
+            if overlapping:
+                return self._json_response({
+                    'status': 'conflict',
+                    'message': "This resource is already booked during the requested time slot."
+                }, status=409)
+                
             booking = request.env['assetflow.resource.booking'].sudo().create({
                 'asset_id': int(asset_id),
                 'start_datetime': start_time,
                 'end_datetime': end_time,
-                'status': 'booked'
+                'status': 'upcoming'
             })
             return self._json_response({'status': 'success', 'data': {'id': booking.id, 'status': booking.status}})
         except Exception as e:
@@ -141,7 +199,7 @@ class AssetFlowOperationsAPI(http.Controller):
                 'asset_id': int(asset_id),
                 'description': description,
                 'priority': priority,
-                'status': 'draft'
+                'status': 'pending'
             })
             return self._json_response({'status': 'success', 'data': {'id': maint.id, 'code': maint.code}})
         except Exception as e:

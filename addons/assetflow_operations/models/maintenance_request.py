@@ -15,10 +15,13 @@ class MaintenanceRequest(models.Model):
         ('high', 'High')
     ], string='Priority', default='medium', required=True, tracking=True)
     status = fields.Selection([
-        ('draft', 'Draft'),
+        ('pending', 'Pending Approval'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+        ('assigned', 'Technician Assigned'),
         ('in_progress', 'Under Repair'),
         ('resolved', 'Resolved')
-    ], string='Status', default='draft', required=True, tracking=True)
+    ], string='Status', default='pending', required=True, tracking=True)
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -26,3 +29,12 @@ class MaintenanceRequest(models.Model):
             if vals.get('code', 'New') == 'New':
                 vals['code'] = self.env['ir.sequence'].next_by_code('assetflow.maintenance.request') or 'New'
         return super().create(vals_list)
+
+    def write(self, vals):
+        res = super().write(vals)
+        for record in self:
+            if record.status == 'approved':
+                record.asset_id.write({'status': 'maintenance'})
+            elif record.status == 'resolved':
+                record.asset_id.write({'status': 'available'})
+        return res

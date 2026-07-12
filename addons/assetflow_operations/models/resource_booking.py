@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from odoo import models, fields
+from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 class ResourceBooking(models.Model):
     _name = 'assetflow.resource.booking'
@@ -11,7 +12,22 @@ class ResourceBooking(models.Model):
     start_datetime = fields.Datetime(string='Start Time', required=True, tracking=True)
     end_datetime = fields.Datetime(string='End Time', required=True, tracking=True)
     status = fields.Selection([
-        ('draft', 'Draft'),
-        ('booked', 'Confirmed Booked'),
+        ('upcoming', 'Upcoming'),
+        ('ongoing', 'Ongoing'),
+        ('completed', 'Completed'),
         ('cancelled', 'Cancelled')
-    ], string='Status', default='draft', required=True, tracking=True)
+    ], string='Status', default='upcoming', required=True, tracking=True)
+
+    @api.constrains('asset_id', 'start_datetime', 'end_datetime', 'status')
+    def _check_booking_overlap(self):
+        for record in self:
+            if record.status in ['upcoming', 'ongoing']:
+                overlapping = self.search([
+                    ('id', '!=', record.id),
+                    ('asset_id', '=', record.asset_id.id),
+                    ('status', 'in', ['upcoming', 'ongoing']),
+                    ('start_datetime', '<', record.end_datetime),
+                    ('end_datetime', '>', record.start_datetime)
+                ])
+                if overlapping:
+                    raise ValidationError("This resource is already booked during the requested time slot.")

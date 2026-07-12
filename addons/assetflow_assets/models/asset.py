@@ -9,3 +9,12 @@ class Asset(models.Model):
     name = fields.Char(string='Asset Name', required=True)
     code = fields.Char(string='Asset Code', default='New')
     active = fields.Boolean(string='Active', default=True)
+    status = fields.Selection([
+        ('available', 'Available'),
+        ('allocated', 'Allocated'),
+        ('reserved', 'Reserved'),
+        ('maintenance', 'Under Maintenance'),
+        ('lost', 'Lost'),
+        ('retired', 'Retired'),
+        ('disposed', 'Disposed')
+    ], string='Status', default='available', tracking=True)
