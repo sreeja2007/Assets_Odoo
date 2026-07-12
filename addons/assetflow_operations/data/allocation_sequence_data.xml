@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- Allocation Sequence -->
-        <!-- TODO: Define allocation code sequence (e.g., ALLOC/0001) -->
+        <record id="seq_assetflow_allocation" model="ir.sequence">
+            <field name="name">Asset Allocation Sequence</field>
+            <field name="code">assetflow.asset.allocation</field>
+            <field name="prefix">ALLOC/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
     </data>
 </odoo>

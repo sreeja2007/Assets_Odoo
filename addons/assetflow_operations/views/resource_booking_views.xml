@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Resource Booking Tree View -->
-    <!-- TODO: Implement booking list view -->
+    <record id="view_resource_booking_tree" model="ir.ui.view">
+        <field name="name">assetflow.resource.booking.tree</field>
+        <field name="model">assetflow.resource.booking</field>
+        <field name="arch" type="xml">
+            <tree string="Resource Bookings">
+                <field name="asset_id"/>
+                <field name="user_id"/>
+                <field name="start_datetime"/>
+                <field name="end_datetime"/>
+                <field name="status" widget="badge"/>
+            </tree>
+        </field>
+    </record>
 
-    <!-- Resource Booking Form View -->
-    <!-- TODO: Implement booking form view -->
-
-    <!-- Resource Booking Calendar View -->
-    <!-- TODO: Implement booking calendar view -->
-
-    <!-- Resource Booking Action -->
-    <!-- TODO: Implement booking action -->
+    <record id="view_resource_booking_form" model="ir.ui.view">
+        <field name="name">assetflow.resource.booking.form</field>
+        <field name="model">assetflow.resource.booking</field>
+        <field name="arch" type="xml">
+            <form string="Resource Booking">
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,booked,cancelled"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="asset_id"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group>
+                            <field name="start_datetime"/>
+                            <field name="end_datetime"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
 </odoo>

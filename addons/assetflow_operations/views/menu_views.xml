@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Operations Sub-Menu Items -->
-    <!-- TODO: Define operations menu items under AssetFlow root menu -->
+    <menuitem id="menu_assetflow_ops_root" name="Operations" parent="assetflow_base.menu_assetflow_root" sequence="20"/>
+    
+    <record id="action_asset_allocation" model="ir.actions.act_window">
+        <field name="name">Asset Allocations</field>
+        <field name="res_model">assetflow.asset.allocation</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_asset_allocation" name="Allocations" parent="menu_assetflow_ops_root" action="action_asset_allocation" sequence="10"/>
+
+    <record id="action_asset_transfer" model="ir.actions.act_window">
+        <field name="name">Asset Transfers</field>
+        <field name="res_model">assetflow.asset.transfer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_asset_transfer" name="Transfers" parent="menu_assetflow_ops_root" action="action_asset_transfer" sequence="20"/>
+
+    <record id="action_resource_booking" model="ir.actions.act_window">
+        <field name="name">Resource Bookings</field>
+        <field name="res_model">assetflow.resource.booking</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_resource_booking" name="Bookings" parent="menu_assetflow_ops_root" action="action_resource_booking" sequence="30"/>
+
+    <record id="action_maintenance_request" model="ir.actions.act_window">
+        <field name="name">Maintenance Requests</field>
+        <field name="res_model">assetflow.maintenance.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_maintenance_request" name="Maintenance" parent="menu_assetflow_ops_root" action="action_maintenance_request" sequence="40"/>
 </odoo>

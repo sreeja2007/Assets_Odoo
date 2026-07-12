@@ -1,11 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Asset Transfer Tree View -->
-    <!-- TODO: Implement transfer list view -->
+    <record id="view_asset_transfer_tree" model="ir.ui.view">
+        <field name="name">assetflow.asset.transfer.tree</field>
+        <field name="model">assetflow.asset.transfer</field>
+        <field name="arch" type="xml">
+            <tree string="Asset Transfers">
+                <field name="asset_id"/>
+                <field name="from_dept_id"/>
+                <field name="to_dept_id"/>
+                <field name="transfer_date"/>
+                <field name="status" widget="badge"/>
+            </tree>
+        </field>
+    </record>
 
-    <!-- Asset Transfer Form View -->
-    <!-- TODO: Implement transfer form view with approval workflow -->
-
-    <!-- Asset Transfer Action -->
-    <!-- TODO: Implement transfer action -->
+    <record id="view_asset_transfer_form" model="ir.ui.view">
+        <field name="name">assetflow.asset.transfer.form</field>
+        <field name="model">assetflow.asset.transfer</field>
+        <field name="arch" type="xml">
+            <form string="Asset Transfer">
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,approved,rejected"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="asset_id"/>
+                            <field name="transfer_date"/>
+                        </group>
+                        <group>
+                            <field name="from_dept_id"/>
+                            <field name="to_dept_id"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
 </odoo>

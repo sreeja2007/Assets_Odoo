@@ -1,14 +1,28 @@
 # -*- coding: utf-8 -*-
-
 from odoo import models, fields, api
 
-
 class MaintenanceRequest(models.Model):
-    """Maintenance Request model for asset maintenance."""
     _name = 'assetflow.maintenance.request'
     _description = 'Maintenance Request'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    # TODO: Implement maintenance fields (asset_id, type, priority, status, etc.)
-    # TODO: Implement maintenance workflow
-    pass
+    code = fields.Char(string='Maintenance Reference', required=True, copy=False, readonly=True, default='New')
+    asset_id = fields.Many2one('assetflow.asset', string='Asset', required=True, tracking=True)
+    description = fields.Text(string='Issue Description', required=True)
+    priority = fields.Selection([
+        ('low', 'Low'),
+        ('medium', 'Medium'),
+        ('high', 'High')
+    ], string='Priority', default='medium', required=True, tracking=True)
+    status = fields.Selection([
+        ('draft', 'Draft'),
+        ('in_progress', 'Under Repair'),
+        ('resolved', 'Resolved')
+    ], string='Status', default='draft', required=True, tracking=True)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('code', 'New') == 'New':
+                vals['code'] = self.env['ir.sequence'].next_by_code('assetflow.maintenance.request') or 'New'
+        return super().create(vals_list)
