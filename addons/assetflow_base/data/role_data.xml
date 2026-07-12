@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="role_admin" model="assetflow.role">
+            <field name="name">Administrator</field>
+            <field name="description">System Administrator with full access</field>
+        </record>
+        <record id="role_asset_manager" model="assetflow.role">
+            <field name="name">Asset Manager</field>
+            <field name="description">Manages assets and allocations</field>
+        </record>
+        <record id="role_dept_head" model="assetflow.role">
+            <field name="name">Department Head</field>
+            <field name="description">Manages department employees and requests</field>
+        </record>
+        <record id="role_employee" model="assetflow.role">
+            <field name="name">Employee</field>
+            <field name="description">Standard employee access</field>
+        </record>
+    </data>
+</odoo>

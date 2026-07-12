@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-# AssetFlow Base Wizards
+from . import promote_employee

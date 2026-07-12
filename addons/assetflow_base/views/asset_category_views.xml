@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Asset Category Tree View -->
-    <!-- TODO: Implement asset category list view -->
+    <record id="view_asset_category_tree" model="ir.ui.view">
+        <field name="name">assetflow.asset.category.tree</field>
+        <field name="model">assetflow.asset.category</field>
+        <field name="arch" type="xml">
+            <tree string="Asset Categories" editable="bottom">
+                <field name="name"/>
+                <field name="warranty_period"/>
+                <field name="description"/>
+                <field name="active" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
 
-    <!-- Asset Category Form View -->
-    <!-- TODO: Implement asset category form view -->
-
-    <!-- Asset Category Action -->
-    <!-- TODO: Implement asset category action -->
+    <record id="view_asset_category_form" model="ir.ui.view">
+        <field name="name">assetflow.asset.category.form</field>
+        <field name="model">assetflow.asset.category</field>
+        <field name="arch" type="xml">
+            <form string="Asset Category">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="warranty_period"/>
+                        <field name="active"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
 </odoo>

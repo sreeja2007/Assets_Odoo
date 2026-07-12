@@ -1,1 +1,12 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_department_employee,department.employee,model_assetflow_department,group_assetflow_employee,1,0,0,0
+access_department_dept_head,department.dept_head,model_assetflow_department,group_assetflow_department_head,1,0,0,0
+access_department_manager,department.manager,model_assetflow_department,group_assetflow_asset_manager,1,1,1,0
+access_department_admin,department.admin,model_assetflow_department,group_assetflow_administrator,1,1,1,1
+access_employee_employee,employee.employee,model_assetflow_employee,group_assetflow_employee,1,0,0,0
+access_employee_dept_head,employee.dept_head,model_assetflow_employee,group_assetflow_department_head,1,1,0,0
+access_employee_manager,employee.manager,model_assetflow_employee,group_assetflow_asset_manager,1,1,1,0
+access_employee_admin,employee.admin,model_assetflow_employee,group_assetflow_administrator,1,1,1,1
+access_category_employee,category.employee,model_assetflow_asset_category,group_assetflow_employee,1,0,0,0
+access_category_manager,category.manager,model_assetflow_asset_category,group_assetflow_asset_manager,1,1,1,1
+access_role_admin,role.admin,model_assetflow_role,group_assetflow_administrator,1,1,1,1

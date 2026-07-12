@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_assetflow_department" model="ir.actions.act_window">
+        <field name="name">Departments</field>
+        <field name="res_model">assetflow.department</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first department!</p>
+        </field>
+    </record>
+
+    <record id="action_assetflow_employee" model="ir.actions.act_window">
+        <field name="name">Employees</field>
+        <field name="res_model">assetflow.employee</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_assetflow_asset_category" model="ir.actions.act_window">
+        <field name="name">Asset Categories</field>
+        <field name="res_model">assetflow.asset.category</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_assetflow_role" model="ir.actions.act_window">
+        <field name="name">Roles</field>
+        <field name="res_model">assetflow.role</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

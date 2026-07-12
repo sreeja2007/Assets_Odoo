@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_assetflow_root" name="AssetFlow" sequence="10"/>
+    
+    <menuitem id="menu_assetflow_organization" name="Organization" parent="menu_assetflow_root" sequence="10"/>
+    
+    <menuitem id="menu_department" name="Departments" parent="menu_assetflow_organization" action="action_assetflow_department" sequence="10"/>
+    <menuitem id="menu_employee" name="Employees" parent="menu_assetflow_organization" action="action_assetflow_employee" sequence="20"/>
+    <menuitem id="menu_asset_category" name="Asset Categories" parent="menu_assetflow_organization" action="action_assetflow_asset_category" sequence="30"/>
+    <menuitem id="menu_role" name="Roles" parent="menu_assetflow_organization" action="action_assetflow_role" sequence="40" groups="group_assetflow_administrator"/>
+</odoo>
