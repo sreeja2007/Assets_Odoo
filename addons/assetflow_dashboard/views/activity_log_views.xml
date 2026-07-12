@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Activity Log Tree View -->
+    <!-- TODO: Implement activity log list view -->
+
+    <!-- Activity Log Search View -->
+    <!-- TODO: Implement activity log search with date filters -->
+
+    <!-- Activity Log Action -->
+    <!-- TODO: Implement activity log action -->
+</odoo>

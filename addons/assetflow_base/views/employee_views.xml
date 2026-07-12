@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Employee Tree View -->
+    <!-- TODO: Implement employee list view -->
+
+    <!-- Employee Form View -->
+    <!-- TODO: Implement employee form view -->
+
+    <!-- Employee Search View -->
+    <!-- TODO: Implement employee search view -->
+
+    <!-- Employee Action -->
+    <!-- TODO: Implement employee action -->
+</odoo>

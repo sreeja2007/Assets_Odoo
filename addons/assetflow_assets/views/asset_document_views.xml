@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Asset Document Tree View -->
+    <!-- TODO: Implement document list view -->
+
+    <!-- Asset Document Form View -->
+    <!-- TODO: Implement document form view -->
+
+    <!-- Asset Document Action -->
+    <!-- TODO: Implement document action -->
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Asset Allocation Tree View -->
+    <!-- TODO: Implement allocation list view -->
+
+    <!-- Asset Allocation Form View -->
+    <!-- TODO: Implement allocation form view with status bar -->
+
+    <!-- Asset Allocation Search View -->
+    <!-- TODO: Implement allocation search view -->
+
+    <!-- Asset Allocation Action -->
+    <!-- TODO: Implement allocation action -->
+</odoo>

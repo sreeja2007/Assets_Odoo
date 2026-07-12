@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Asset Transfer Tree View -->
+    <!-- TODO: Implement transfer list view -->
+
+    <!-- Asset Transfer Form View -->
+    <!-- TODO: Implement transfer form view with approval workflow -->
+
+    <!-- Asset Transfer Action -->
+    <!-- TODO: Implement transfer action -->
+</odoo>

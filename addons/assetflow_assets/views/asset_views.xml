@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Asset Tree View -->
+    <!-- TODO: Implement asset list view -->
+
+    <!-- Asset Form View -->
+    <!-- TODO: Implement asset form view with lifecycle status bar -->
+
+    <!-- Asset Kanban View -->
+    <!-- TODO: Implement asset kanban view -->
+
+    <!-- Asset Search View -->
+    <!-- TODO: Implement asset search view with filters and grouping -->
+
+    <!-- Asset Action -->
+    <!-- TODO: Implement asset action -->
+</odoo>

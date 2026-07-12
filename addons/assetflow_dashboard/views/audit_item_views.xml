@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Audit Item Tree View -->
+    <!-- TODO: Implement audit item list view -->
+
+    <!-- Audit Item Form View -->
+    <!-- TODO: Implement audit item form view -->
+
+    <!-- Audit Item Action -->
+    <!-- TODO: Implement audit item action -->
+</odoo>

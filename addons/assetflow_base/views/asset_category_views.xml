@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Asset Category Tree View -->
+    <!-- TODO: Implement asset category list view -->
+
+    <!-- Asset Category Form View -->
+    <!-- TODO: Implement asset category form view -->
+
+    <!-- Asset Category Action -->
+    <!-- TODO: Implement asset category action -->
+</odoo>

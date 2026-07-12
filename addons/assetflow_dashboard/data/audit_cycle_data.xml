@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Default Audit Cycle Templates -->
+        <!-- TODO: Add default audit cycle configurations -->
+    </data>
+</odoo>

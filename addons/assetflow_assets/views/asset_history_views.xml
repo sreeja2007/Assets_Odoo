@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Asset History Tree View -->
+    <!-- TODO: Implement asset history list view -->
+
+    <!-- Asset History Form View -->
+    <!-- TODO: Implement asset history form view -->
+
+    <!-- Asset History Action -->
+    <!-- TODO: Implement asset history action -->
+</odoo>

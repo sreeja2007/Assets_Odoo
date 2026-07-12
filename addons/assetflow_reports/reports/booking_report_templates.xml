@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Booking Report Action -->
+    <!-- TODO: Define booking report action -->
+
+    <!-- Booking Report QWeb Template -->
+    <!-- TODO: Implement booking report PDF template -->
+</odoo>

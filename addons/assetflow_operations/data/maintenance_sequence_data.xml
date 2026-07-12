@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Maintenance Sequence -->
+        <!-- TODO: Define maintenance request sequence (e.g., MAINT/0001) -->
+    </data>
+</odoo>

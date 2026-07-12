@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Department Tree View -->
+    <!-- TODO: Implement department list view -->
+
+    <!-- Department Form View -->
+    <!-- TODO: Implement department form view -->
+
+    <!-- Department Search View -->
+    <!-- TODO: Implement department search view -->
+
+    <!-- Department Action -->
+    <!-- TODO: Implement department action -->
+</odoo>

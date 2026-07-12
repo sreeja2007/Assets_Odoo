@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Allocation Sequence -->
+        <!-- TODO: Define allocation code sequence (e.g., ALLOC/0001) -->
+    </data>
+</odoo>

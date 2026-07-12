@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Asset Location Tree View -->
+    <!-- TODO: Implement location list view -->
+
+    <!-- Asset Location Form View -->
+    <!-- TODO: Implement location form view -->
+
+    <!-- Asset Location Action -->
+    <!-- TODO: Implement location action -->
+</odoo>

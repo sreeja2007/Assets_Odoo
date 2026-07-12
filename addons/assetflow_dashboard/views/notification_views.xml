@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Notification Tree View -->
+    <!-- TODO: Implement notification list view -->
+
+    <!-- Notification Form View -->
+    <!-- TODO: Implement notification form view -->
+
+    <!-- Notification Action -->
+    <!-- TODO: Implement notification action -->
+</odoo>

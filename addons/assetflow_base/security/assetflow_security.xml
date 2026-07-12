@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- AssetFlow Module Category -->
+    <!-- TODO: Define module category -->
+
+    <!-- Security Groups -->
+    <!-- TODO: Define AssetFlow User group -->
+    <!-- TODO: Define AssetFlow Manager group -->
+    <!-- TODO: Define AssetFlow Admin group -->
+
+    <!-- Record Rules -->
+    <!-- TODO: Define record-level access rules -->
+</odoo>

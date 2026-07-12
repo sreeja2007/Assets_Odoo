@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Dashboard Main View -->
+    <!-- TODO: Implement dashboard view with KPI cards -->
+    <!-- TODO: Implement chart widgets -->
+    <!-- TODO: Implement summary statistics -->
+</odoo>

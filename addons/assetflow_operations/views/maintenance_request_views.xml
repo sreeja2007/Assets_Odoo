@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Maintenance Request Tree View -->
+    <!-- TODO: Implement maintenance list view -->
+
+    <!-- Maintenance Request Form View -->
+    <!-- TODO: Implement maintenance form view with priority and status -->
+
+    <!-- Maintenance Request Kanban View -->
+    <!-- TODO: Implement maintenance kanban view -->
+
+    <!-- Maintenance Request Action -->
+    <!-- TODO: Implement maintenance action -->
+</odoo>

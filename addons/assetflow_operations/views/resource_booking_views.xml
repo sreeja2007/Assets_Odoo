@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Resource Booking Tree View -->
+    <!-- TODO: Implement booking list view -->
+
+    <!-- Resource Booking Form View -->
+    <!-- TODO: Implement booking form view -->
+
+    <!-- Resource Booking Calendar View -->
+    <!-- TODO: Implement booking calendar view -->
+
+    <!-- Resource Booking Action -->
+    <!-- TODO: Implement booking action -->
+</odoo>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Default Asset Categories -->
+        <!-- TODO: Add default asset categories -->
+    </data>
+</odoo>

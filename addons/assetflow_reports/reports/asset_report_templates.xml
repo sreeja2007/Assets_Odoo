@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Asset Report Action -->
+    <!-- TODO: Define asset report action -->
+
+    <!-- Asset Report QWeb Template -->
+    <!-- TODO: Implement asset report PDF template -->
+</odoo>
