@@ -1,1 +1,11 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_asset_manager,asset.manager,model_assetflow_asset,assetflow_assets.group_asset_manager,1,1,1,1
+access_location_manager,location.manager,model_assetflow_asset_location,assetflow_assets.group_asset_manager,1,1,1,1
+access_history_manager,history.manager,model_assetflow_asset_history,assetflow_assets.group_asset_manager,1,1,1,1
+access_document_manager,document.manager,model_assetflow_asset_document,assetflow_assets.group_asset_manager,1,1,1,1
+
+access_asset_department,asset.department,model_assetflow_asset,assetflow_assets.group_department_head,1,0,0,0
+access_location_department,location.department,model_assetflow_asset_location,assetflow_assets.group_department_head,1,0,0,0
+
+access_asset_employee,asset.employee,model_assetflow_asset,assetflow_assets.group_asset_employee,1,0,0,0
