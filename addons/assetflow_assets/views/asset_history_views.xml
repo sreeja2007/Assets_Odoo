@@ -1,11 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Asset History Tree View -->
-    <!-- TODO: Implement asset history list view -->
 
-    <!-- Asset History Form View -->
-    <!-- TODO: Implement asset history form view -->
+    <record id="view_asset_history_tree" model="ir.ui.view">
+        <field name="name">assetflow.asset.history.tree</field>
+        <field name="model">assetflow.asset.history</field>
+        <field name="arch" type="xml">
+            <tree string="Asset History">
+                <field name="asset_id"/>
+                <field name="date"/>
+                <field name="action"/>
+                <field name="user_id"/>
+                <field name="remarks"/>
+            </tree>
+        </field>
+    </record>
 
-    <!-- Asset History Action -->
-    <!-- TODO: Implement asset history action -->
+    <record id="view_asset_history_form" model="ir.ui.view">
+        <field name="name">assetflow.asset.history.form</field>
+        <field name="model">assetflow.asset.history</field>
+        <field name="arch" type="xml">
+            <form string="Asset History">
+                <sheet>
+                    <group>
+                        <field name="asset_id"/>
+                        <field name="date"/>
+                        <field name="action"/>
+                        <field name="user_id"/>
+                    </group>
+
+                    <group>
+                        <field name="remarks"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
 </odoo>

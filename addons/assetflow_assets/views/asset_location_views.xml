@@ -1,11 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Asset Location Tree View -->
-    <!-- TODO: Implement location list view -->
 
-    <!-- Asset Location Form View -->
-    <!-- TODO: Implement location form view -->
+    <!-- Tree View -->
+    <record id="view_asset_location_tree" model="ir.ui.view">
+        <field name="name">assetflow.asset.location.tree</field>
+        <field name="model">assetflow.asset.location</field>
+        <field name="arch" type="xml">
+            <tree string="Asset Locations">
+                <field name="name"/>
+                <field name="building"/>
+                <field name="floor"/>
+                <field name="room"/>
+            </tree>
+        </field>
+    </record>
 
-    <!-- Asset Location Action -->
-    <!-- TODO: Implement location action -->
+    <!-- Form View -->
+    <record id="view_asset_location_form" model="ir.ui.view">
+        <field name="name">assetflow.asset.location.form</field>
+        <field name="model">assetflow.asset.location</field>
+        <field name="arch" type="xml">
+            <form string="Asset Location">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="building"/>
+                        <field name="floor"/>
+                        <field name="room"/>
+                    </group>
+
+                    <group>
+                        <field name="description"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Assets">
+                            <field name="asset_ids">
+                                <tree>
+                                    <field name="asset_id"/>
+                                    <field name="name"/>
+                                    <field name="status"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
 </odoo>

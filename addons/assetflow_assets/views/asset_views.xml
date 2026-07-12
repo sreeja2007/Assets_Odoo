@@ -1,17 +1,286 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Asset Tree View -->
-    <!-- TODO: Implement asset list view -->
 
-    <!-- Asset Form View -->
-    <!-- TODO: Implement asset form view with lifecycle status bar -->
+    <!-- =========================
+         TREE VIEW
+    ========================== -->
 
-    <!-- Asset Kanban View -->
-    <!-- TODO: Implement asset kanban view -->
+    <record id="view_asset_tree" model="ir.ui.view">
+        <field name="name">assetflow.asset.tree</field>
+        <field name="model">assetflow.asset</field>
+        <field name="arch" type="xml">
+            <tree string="Assets">
+                <field name="asset_id"/>
+                <field name="name"/>
+                <field name="asset_tag"/>
+                <field name="category_id"/>
+                <field name="department_id"/>
+                <field name="employee_id"/>
+                <field name="location_id"/>
+                <field name="status"/>
+                <field name="condition"/>
+            </tree>
+        </field>
+    </record>
 
-    <!-- Asset Search View -->
-    <!-- TODO: Implement asset search view with filters and grouping -->
+    <!-- =========================
+         FORM VIEW
+    ========================== -->
 
-    <!-- Asset Action -->
-    <!-- TODO: Implement asset action -->
+    <record id="view_asset_form" model="ir.ui.view">
+        <field name="name">assetflow.asset.form</field>
+        <field name="model">assetflow.asset</field>
+        <field name="arch" type="xml">
+
+            <form string="Asset">
+
+                <sheet>
+
+                    <group>
+
+                        <group>
+
+                            <field name="image"
+                                   widget="image"/>
+
+                            <field name="asset_id"
+                                   readonly="1"/>
+
+                            <field name="name"/>
+
+                            <field name="asset_tag"/>
+
+                            <field name="serial_number"/>
+
+                            <field name="category_id"/>
+
+                            <field name="department_id"/>
+
+                            <field name="employee_id"/>
+
+                        </group>
+
+                        <group>
+
+                            <field name="location_id"/>
+
+                            <field name="purchase_date"/>
+
+                            <field name="purchase_cost"/>
+
+                            <field name="vendor"/>
+
+                            <field name="warranty_expiry"/>
+
+                            <field name="barcode"/>
+
+                            <field name="qr_code"/>
+
+                            <field name="condition"/>
+
+                            <field name="status"/>
+
+                        </group>
+
+                    </group>
+
+                    <notebook>
+
+                        <page string="Description">
+
+                            <field name="description"/>
+
+                        </page>
+
+                        <page string="Documents">
+
+                            <field name="document_ids">
+
+                                <tree editable="bottom">
+
+                                    <field name="name"/>
+
+                                    <field name="document_type"/>
+
+                                    <field name="upload_date"/>
+
+                                    <field name="uploaded_by"/>
+
+                                </tree>
+
+                            </field>
+
+                        </page>
+
+                        <page string="History">
+
+                            <field name="history_ids">
+
+                                <tree>
+
+                                    <field name="date"/>
+
+                                    <field name="action"/>
+
+                                    <field name="user_id"/>
+
+                                    <field name="remarks"/>
+
+                                </tree>
+
+                            </field>
+
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+
+                <chatter>
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </chatter>
+
+            </form>
+
+        </field>
+    </record>
+
+    <!-- =========================
+         SEARCH VIEW
+    ========================== -->
+
+    <record id="view_asset_search" model="ir.ui.view">
+        <field name="name">assetflow.asset.search</field>
+        <field name="model">assetflow.asset</field>
+        <field name="arch" type="xml">
+
+            <search>
+
+                <field name="name"/>
+
+                <field name="asset_tag"/>
+
+                <field name="department_id"/>
+
+                <field name="category_id"/>
+
+                <field name="employee_id"/>
+
+                <field name="location_id"/>
+
+                <separator/>
+
+                <filter
+                    string="Available"
+                    name="available"
+                    domain="[('status','=','available')]"/>
+
+                <filter
+                    string="Allocated"
+                    name="allocated"
+                    domain="[('status','=','allocated')]"/>
+
+                <filter
+                    string="Maintenance"
+                    name="maintenance"
+                    domain="[('status','=','maintenance')]"/>
+
+                <filter
+                    string="Lost"
+                    name="lost"
+                    domain="[('status','=','lost')]"/>
+
+                <filter
+                    string="Retired"
+                    name="retired"
+                    domain="[('status','=','retired')]"/>
+
+                <group expand="0" string="Group By">
+
+                    <filter
+                        string="Department"
+                        context="{'group_by':'department_id'}"/>
+
+                    <filter
+                        string="Category"
+                        context="{'group_by':'category_id'}"/>
+
+                    <filter
+                        string="Location"
+                        context="{'group_by':'location_id'}"/>
+
+                    <filter
+                        string="Status"
+                        context="{'group_by':'status'}"/>
+
+                </group>
+
+            </search>
+
+        </field>
+    </record>
+
+    <!-- =========================
+         KANBAN VIEW
+    ========================== -->
+
+    <record id="view_asset_kanban" model="ir.ui.view">
+        <field name="name">assetflow.asset.kanban</field>
+        <field name="model">assetflow.asset</field>
+        <field name="arch" type="xml">
+
+            <kanban>
+
+                <field name="image"/>
+                <field name="name"/>
+                <field name="asset_tag"/>
+                <field name="status"/>
+
+                <templates>
+
+                    <t t-name="kanban-box">
+
+                        <div class="oe_kanban_global_click">
+
+                            <div class="oe_kanban_image">
+
+                                <img t-att-src="kanban_image('assetflow.asset','image',record.id.value)"/>
+
+                            </div>
+
+                            <div>
+
+                                <strong>
+
+                                    <field name="name"/>
+
+                                </strong>
+
+                            </div>
+
+                            <div>
+
+                                <field name="asset_tag"/>
+
+                            </div>
+
+                            <div>
+
+                                <field name="status"/>
+
+                            </div>
+
+                        </div>
+
+                    </t>
+
+                </templates>
+
+            </kanban>
+
+        </field>
+    </record>
+
 </odoo>

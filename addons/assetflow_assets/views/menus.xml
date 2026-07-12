@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- Root Menu -->
+    <menuitem
+        id="menu_asset_root"
+        name="Assets"
+        sequence="20"/>
+
+    <!-- Asset Directory -->
+    <menuitem
+        id="menu_asset_directory"
+        name="Asset Directory"
+        parent="menu_asset_root"
+        action="action_asset_directory"
+        sequence="1"/>
+
+    <!-- Asset Locations -->
+    <menuitem
+        id="menu_asset_locations"
+        name="Asset Locations"
+        parent="menu_asset_root"
+        action="action_asset_location"
+        sequence="2"/>
+
+    <!-- Asset History -->
+    <menuitem
+        id="menu_asset_history"
+        name="Asset History"
+        parent="menu_asset_root"
+        action="action_asset_history"
+        sequence="3"/>
+
+    <!-- Asset Documents -->
+    <menuitem
+        id="menu_asset_documents"
+        name="Asset Documents"
+        parent="menu_asset_root"
+        action="action_asset_document"
+        sequence="4"/>
+
+</odoo>

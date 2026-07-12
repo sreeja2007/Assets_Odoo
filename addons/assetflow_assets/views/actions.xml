@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="action_asset_directory" model="ir.actions.act_window">
+        <field name="name">Asset Directory</field>
+        <field name="res_model">assetflow.asset</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record id="action_asset_location" model="ir.actions.act_window">
+        <field name="name">Asset Locations</field>
+        <field name="res_model">assetflow.asset.location</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_asset_history" model="ir.actions.act_window">
+        <field name="name">Asset History</field>
+        <field name="res_model">assetflow.asset.history</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_asset_document" model="ir.actions.act_window">
+        <field name="name">Asset Documents</field>
+        <field name="res_model">assetflow.asset.document</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

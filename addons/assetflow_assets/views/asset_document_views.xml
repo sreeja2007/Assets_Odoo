@@ -1,11 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Asset Document Tree View -->
-    <!-- TODO: Implement document list view -->
 
-    <!-- Asset Document Form View -->
-    <!-- TODO: Implement document form view -->
+    <record id="view_asset_document_tree" model="ir.ui.view">
+        <field name="name">assetflow.asset.document.tree</field>
+        <field name="model">assetflow.asset.document</field>
+        <field name="arch" type="xml">
+            <tree string="Asset Documents">
+                <field name="name"/>
+                <field name="document_type"/>
+                <field name="asset_id"/>
+                <field name="upload_date"/>
+                <field name="uploaded_by"/>
+            </tree>
+        </field>
+    </record>
 
-    <!-- Asset Document Action -->
-    <!-- TODO: Implement document action -->
+    <record id="view_asset_document_form" model="ir.ui.view">
+        <field name="name">assetflow.asset.document.form</field>
+        <field name="model">assetflow.asset.document</field>
+        <field name="arch" type="xml">
+            <form string="Asset Document">
+                <sheet>
+
+                    <group>
+                        <field name="asset_id"/>
+                        <field name="name"/>
+                        <field name="document_type"/>
+                        <field name="attachment" filename="filename"/>
+                        <field name="filename"/>
+                        <field name="upload_date"/>
+                        <field name="uploaded_by"/>
+                    </group>
+
+                    <group>
+                        <field name="notes"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
 </odoo>
