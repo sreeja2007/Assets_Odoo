@@ -1,13 +1,38 @@
-# -*- coding: utf-8 -*-
-
-from odoo import models, fields, api
+from odoo import fields, models
 
 
 class AssetLocation(models.Model):
-    """Asset Location management."""
-    _name = 'assetflow.asset.location'
-    _description = 'Asset Location'
-    _inherit = ['mail.thread']
+    _name = "assetflow.asset.location"
+    _description = "Asset Location"
+    _rec_name = "name"
 
-    # TODO: Implement location fields (name, address, parent, etc.)
-    pass
+    name = fields.Char(
+        string="Location Name",
+        required=True,
+    )
+
+    building = fields.Char(
+        string="Building",
+    )
+
+    floor = fields.Char(
+        string="Floor",
+    )
+
+    room = fields.Char(
+        string="Room",
+    )
+
+    description = fields.Text(
+        string="Description",
+    )
+
+    asset_ids = fields.One2many(
+        "assetflow.asset",
+        "location_id",
+        string="Assets",
+    )
+
+    active = fields.Boolean(
+        default=True,
+    )
