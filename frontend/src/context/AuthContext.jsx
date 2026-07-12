@@ -2,13 +2,32 @@ import { createContext, useContext, useState, useCallback } from 'react';
 import { users, ROLES } from '../data/mockData';
 
 const AuthContext = createContext(null);
+const API_BASE = 'http://localhost:8069';
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [error, setError] = useState('');
 
-  const login = useCallback((email, password) => {
-    // Mock auth – find user by email (password ignored in mock)
+  const login = useCallback(async (email, password) => {
+    try {
+      const response = await fetch(`${API_BASE}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      if (response.ok) {
+        const json = await response.json();
+        if (json.status === 'success') {
+          setCurrentUser(json.data);
+          setError('');
+          return true;
+        }
+      }
+    } catch (e) {
+      console.warn("Odoo auth API offline. Falling back to mock login.");
+    }
+
+    // Mock auth fallback – find user by email (password ignored in mock)
     const found = users.find(u => u.email.toLowerCase() === email.toLowerCase());
     if (!found) {
       setError('No account found with this email.');
