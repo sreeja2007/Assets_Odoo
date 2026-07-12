@@ -99,37 +99,7 @@ export default function DashboardPage() {
         <KpiCard icon={Clock}         label="Upcoming Returns"   value={kpis.upcoming}         color="bg-slate-500" sub="within 7 days" />
       </div>
 
-      {/* Overdue Alerts */}
-      {overdueAllocations.length > 0 && (
-        <div className="bg-red-50 border border-red-200 rounded-2xl p-5">
-          <div className="flex items-center gap-2 mb-3">
-            <AlertTriangle size={18} className="text-red-600" />
-            <h2 className="text-base font-semibold text-red-800">
-              {overdueAllocations.length} Overdue Return{overdueAllocations.length > 1 ? 's' : ''} — Flagged for follow-up
-            </h2>
-          </div>
-          <div className="space-y-2">
-            {overdueAllocations.map(a => {
-              const daysOverdue = Math.floor((today - new Date(a.expectedReturnDate)) / (1000 * 60 * 60 * 24));
-              return (
-                <div key={a.id} className="flex flex-col sm:flex-row sm:items-center justify-between bg-white/70 rounded-xl px-4 py-2.5 gap-2">
-                  <div className="flex items-center gap-3">
-                    <Package size={15} className="text-red-400" />
-                    <div>
-                      <p className="text-sm font-medium text-slate-900">{a.assetName} <span className="text-slate-400 font-normal">({a.assetTag})</span></p>
-                      <p className="text-xs text-slate-500">Held by {a.userName}</p>
-                    </div>
-                  </div>
-                  <div className="text-left sm:text-right">
-                    <p className="text-xs font-semibold text-red-600">{daysOverdue}d overdue</p>
-                    <p className="text-xs text-slate-400">Due: {new Date(a.expectedReturnDate).toLocaleDateString()}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
+
 
       {/* Quick Actions */}
       <div>
