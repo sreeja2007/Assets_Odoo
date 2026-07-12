@@ -71,40 +71,6 @@ The platform enables organizations to efficiently manage physical assets, alloca
 
 ---
 
-# 🏗 Project Architecture
-
-```
-assetflow/
-│
-├── addons/
-│   ├── assetflow_base/
-│   ├── assetflow_assets/
-│   ├── assetflow_operations/
-│   ├── assetflow_dashboard/
-│   └── assetflow_reports/
-│
-├── frontend/
-│
-├── docs/
-│
-├── docker-compose.yml
-├── requirements.txt
-└── README.md
-```
-
----
-
-# 👨‍💻 Team Structure
-
-| Member | Module |
-|---------|--------|
-| Member 1 | assetflow_base |
-| Member 2 | assetflow_assets |
-| Member 3 | assetflow_operations |
-| Member 4 | assetflow_dashboard |
-| Team | assetflow_reports & Integration |
-
----
 
 # 🛠 Technology Stack
 
@@ -279,21 +245,6 @@ http://localhost:5173
 
 ---
 
-# 📸 Screenshots
-
-### Login
-
-> *(Add login page screenshot here)*
-
-### Dashboard
-
-> *(Add dashboard screenshot here)*
-
-### Assets
-
-> *(Add assets page screenshot here)*
-
----
 
 # 🤝 Contributing
 
